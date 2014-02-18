@@ -1,3 +1,4 @@
+require 'pry'
 class Grid
 
   attr_reader :grid_values
@@ -15,7 +16,10 @@ class Grid
     grid_values.first.length
   end
 
-  def horizontal
+  def horizontal(row, column, cells=nil)
+    cells ||= length
+    tail = column+cells-1
+    (column..tail).to_a.collect {|col| grid_values[row][col] || 1}.reduce(:*)
   end
 
 end

@@ -21,4 +21,16 @@ class GridTest < MiniTest::Test
     assert_equal 26588, grid.horizontal(0,0)
   end
 
+  def test_a_horizontal_product_of_less_numbers_than_full_length_can_be_calculated
+    assert_equal 782, grid.horizontal(0,0,2)
+  end
+
+  def test_horizontal_edge
+    assert_equal 34, grid.horizontal(1,2,2)
+  end
+
+  def test_vertical_edge
+    assert_equal 989, grid.vertical(0,0)
+  end
+
 end
