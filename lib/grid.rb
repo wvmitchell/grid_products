@@ -43,6 +43,34 @@ class Grid
     values.reduce(:*)
   end
 
+  def diagonal_up(row, column, cells_to_use=nil)
+    raise_unless_in_bounds(row, column)
+
+    if cells_to_use
+      row_tail = row-cells_to_use < 0 ? 0 : row-cells_to_use
+      column_tail = column+cells_to_use > length ? length-1 : column+cells_to_use
+    else
+      row_tail = 0
+      column_tail = length-1
+    end
+
+    points_to_find = (row_tail..row).to_a.reverse.zip (column..column_tail).to_a
+
+    values = []
+    grid_values.each_with_index do |row, i|
+      row.each_with_index do |cell, j|
+        values << cell if points_to_find.include?([i,j])
+      end
+    end
+    values.reverse!
+
+    if cells_to_use
+      values.take(cells_to_use).reduce(:*)
+    else
+      values.reduce(:*)
+    end
+  end
+
   def raise_unless_in_bounds(row, col)
     if row < 0 || row >= height
       raise ArgumentError.new('Illegal row token')

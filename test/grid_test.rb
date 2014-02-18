@@ -62,5 +62,13 @@ class GridTest < MiniTest::Test
     assert_equal 23, grid.diagonal_down(0,0,1)
   end
 
+  def test_diagonal_up
+    assert_equal 1462, grid.diagonal_up(1,0)
+  end
+
+  def test_shorter_than_grid_diagonal_up
+    assert_equal 43, grid.diagonal_up(1,0,1)
+  end
+
 
 end
