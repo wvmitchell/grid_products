@@ -33,4 +33,34 @@ class GridTest < MiniTest::Test
     assert_equal 989, grid.vertical(0,0)
   end
 
+  def test_vertical_middle
+    assert_equal 1768, grid.vertical(0,1)
+  end
+
+  def test_vertical_shorter_than_grid
+    assert_equal 43, grid.vertical(1,0)
+    assert_equal 23, grid.vertical(0,0,1)
+  end
+
+  def test_vertical_bad_entry_raises_error
+    assert_raises(ArgumentError) {grid.vertical(-2,0)}
+  end
+
+  def test_horizontal_bad_entry_raises_error
+    assert_raises(ArgumentError) {grid.horizontal(0,-3)}
+  end
+
+  def test_digonals_bad_entry_raises_error
+    assert_raises(ArgumentError) {grid.diagonal_down(-1,0)}
+  end
+
+  def test_diagonal_down
+    assert_equal 1196, grid.diagonal_down(0,0)
+  end
+
+  def test_shorter_than_grid_diagonal_down
+    assert_equal 23, grid.diagonal_down(0,0,1)
+  end
+
+
 end
